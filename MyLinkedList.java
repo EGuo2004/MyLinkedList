@@ -60,4 +60,8 @@ public class MyLinkedList{
    }
    return current;
  }
+
+ public String get(int index) {
+   return getNode(index).getVal();
+ }
 }
