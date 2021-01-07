@@ -64,4 +64,10 @@ public class MyLinkedList{
  public String get(int index) {
    return getNode(index).getVal();
  }
+
+ public String set(int index, String value) {
+   String returnString = get(index);
+   getNode(index).setVal(value);
+   return returnString;
+ }
 }
