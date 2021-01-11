@@ -18,8 +18,16 @@ public class Node {
     prev = x;
   }
 
-  public void getPrev() {
+  public Node getPrev() {
     return prev;
+  }
+
+  public void setVal(String value) {
+    data = value;
+  }
+
+  public String getVal() {
+    return data;
   }
 
 }
