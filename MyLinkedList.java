@@ -81,6 +81,7 @@ public class MyLinkedList{
  }
 
  public String remove(int index) {
+   String returnString = get(getNode(index));
    if (index > size) {
      throw new IndexOutOfBoundsException("Index greater than size of MyLinkedList");
    }
@@ -105,7 +106,7 @@ public class MyLinkedList{
        }
      }
    }
+   size--;
+   return returnString;
  }
-
-
 }
