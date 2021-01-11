@@ -118,4 +118,13 @@ public class MyLinkedList{
    this.size += other.size();
    other = new MyLinkedList();
  }
+
+ public String toStringReversed() {
+   String returnString = "";
+   for(int i = size; i > 1; i--) {
+     returnString += get(i) + ", ";
+   }
+   returnString += start.getVal();
+   return returnString;
+ }
 }
