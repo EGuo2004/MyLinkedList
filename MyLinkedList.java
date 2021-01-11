@@ -31,8 +31,8 @@ public class MyLinkedList{
 
  public void add(int index, String value) {
    Node a = new Node(value);
-   if( index > size) {
-     throw new IndexOutOfBoundsException("Index greater than size of MyLinkedList");
+   if( index > size || index < 0) {
+     throw new IndexOutOfBoundsException("Index Out of Bounds");
    }
    if (index == 0) {
      a.setNext(start);
@@ -40,9 +40,10 @@ public class MyLinkedList{
      start = a;
    } else {
      if(index == size) {
-       a.setPrev(end.getPrev());
-       a.setNext(end);
-       end.setPrev(a);
+       a.setPrev(end);
+       a.setNext(null);
+       end.setNext(a);
+       end = a;
      } else {
        a.setPrev(getNode(index-1));
        a.setNext(getNode(index));
@@ -56,7 +57,9 @@ public class MyLinkedList{
  private Node getNode(int index) {
    Node current = start;
    for(int i = 0; i < index;i++) {
-     current = current.getNext();
+     if (current.getNext() != null) {
+       current = current.getNext();
+     }
    }
    return current;
  }
@@ -72,18 +75,21 @@ public class MyLinkedList{
  }
 
  public String toString() {
-   String returnString = "";
-   for (int i = 0; i < size - 1; i++) {
-     returnString += get(i) + ", ";
+   if(start == null) {
+     return "[]";
    }
-   returnString += end.getVal();
+   String returnString = "[";
+   for (int i = 0; i < size - 1; i++) {
+    returnString += get(i) + ", ";
+   }
+    returnString += get(size) + "]";
    return returnString;
  }
 
  public String remove(int index) {
    String returnString = get(index);
-   if (index > size) {
-     throw new IndexOutOfBoundsException("Index greater than size of MyLinkedList");
+   if (index > size || index < 0) {
+     throw new IndexOutOfBoundsException("Index Out Of Bounds");
    }
    if (index == 0) {
      Node a  = getNode(1);
@@ -98,6 +104,7 @@ public class MyLinkedList{
        if(size == 1) {
          start = null;
          end = start;
+         size = 0;
        } else {
          Node prev = getNode(index - 1);
          Node next = getNode(index + 1);
@@ -116,15 +123,20 @@ public class MyLinkedList{
    TEnd.setNext(OStart);
    OStart.setPrev(TEnd);
    this.size += other.size();
-   other = new MyLinkedList();
+   other.size = 0;
+   other.start = null;
+   other.end = start;
  }
 
  public String toStringReversed() {
-   String returnString = "";
-   for(int i = size; i > 1; i--) {
-     returnString += get(i) + ", ";
+   if(start == null) {
+     return "[]";
    }
-   returnString += start.getVal();
+   String returnString = "[";
+   for(int i = size - 1; i > 0; i--) {
+    returnString += get(i) + ", ";
+   }
+   returnString += start.getVal() + "]";
    return returnString;
  }
 }
