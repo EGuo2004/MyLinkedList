@@ -79,4 +79,33 @@ public class MyLinkedList{
    returnString += end.getVal();
    return returnString;
  }
+
+ public String remove(int index) {
+   if (index > size) {
+     throw new IndexOutOfBoundsException("Index greater than size of MyLinkedList");
+   }
+   if (index == 0) {
+     Node a  = getNode(1);
+     a.setPrev(null);
+     start = a;
+   } else {
+     if (index == size - 1) {
+       Node a = getNode(size - 2);
+       end = a;
+       a.setNext(null);
+     } else {
+       if(size == 1) {
+         start = null;
+         end = start;
+       } else {
+         Node prev = getNode(index - 1);
+         Node next = getNode(index + 1);
+         prev.setNext(next);
+         next.setPrev(prev);
+       }
+     }
+   }
+ }
+
+
 }
